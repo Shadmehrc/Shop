@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Application.Common;
 using Application.IPhoneCrudServices;
 using Application.RepositoryInterfaces;
 using Application.Services;
@@ -9,12 +7,9 @@ using Infrastructore.Repository;
 using Infrastructore.Sql.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace Shop_Products
@@ -30,26 +25,34 @@ namespace Shop_Products
 
         public void ConfigureServices(IServiceCollection services)
         {
-
+            var originsList = new List<string>();
+            var validOrigins = string.Empty;
             services.AddControllers();
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("AllowOrigin", configurePolicy =>
-            //    {
-            //        configurePolicy
-            //            .WithOrigins("http://192.168.1.2:8080")
-            //            .AllowAnyHeader()
-            //            .AllowAnyMethod();
-            //    });
-            //});
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowOriginV2", configurePolicy => configurePolicy.AllowAnyOrigin());
-            });
             services.AddSingleton<DatabaseContext>();
             services.AddScoped<IPhoneCrudService, PhoneCrudService>();
             services.AddScoped<IPhoneRepository, PhoneRepository>();
-           
+            services.AddScoped<IOriginRepository, OriginRepository>();
+            services.AddScoped<IConfigManager, ConfigManager>();
+            {
+                var buildServiceProvider = services.BuildServiceProvider();
+                var service = buildServiceProvider.GetService<IConfigManager>();
+                if (service != null)
+                {
+                    originsList = service.GetOrigin();
+                    originsList.ForEach(x => validOrigins += x + ',');
+                }
+            }
+            services.AddCors(options =>
+        {
+            options.AddPolicy("AllowOrigin", configurePolicy =>
+            {
+                configurePolicy.WithOrigins(validOrigins.Split(','))
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            });
+        });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shop_Products", Version = "v1" });
@@ -68,12 +71,11 @@ namespace Shop_Products
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shop_Products v1"));
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseAuthorization();
+            //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-            //app.UseCors("AllowOrigin");
             app.UseCors("AllowOriginV2");
         }
     }

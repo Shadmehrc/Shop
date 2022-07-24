@@ -11,11 +11,10 @@ namespace Application.IPhoneCrudServices
     public interface IPhoneCrudService
     {
         public Task<bool> AddPhoneAsync(AddPhoneModel model);
-        public Task<ShowPhoneDetailsModel> ShowPhoneDetailsAsync(int id);
-        public Task<ShowPhonePhotoModel> ShowPhonePhotoAsync(int id);
+        public Task<ShowPhoneModel> ShowPhoneAsync(int id);
         public Task<bool> EditPhoneAsync(EditPhoneModel model );
         public Task<bool> DeletePhoneAsync(int id);
-        public Task<List<ShowPhoneDetailsModel>> ShowPhoneAllAsync(GetAllPhonesModel model);
+        public Task<List<ShowPhoneModel>> ShowPhoneAllAsync(GetAllPhonesModel model);
 
     }
 }

@@ -33,7 +33,7 @@ namespace Infrastructore.Repository
            return false;
        }
 
-        public async Task<Phone> ShowPhoneDetailsAsync(int id)
+        public async Task<Phone> ShowPhoneAsync(int id)
         {
             var phone = await _dbContext.Phones.FirstOrDefaultAsync(x => x.Id == id);
            if (phone != null && phone.IsRemoved!=true)
@@ -43,18 +43,6 @@ namespace Infrastructore.Repository
                 return phone;
            }
            return null;
-        }
-
-        public async Task<Phone> ShowPhonePhotoAsync(int id)
-        {
-            var phone =await _dbContext.Phones.FirstOrDefaultAsync(x => x.Id == id);
-            if (phone != null && phone.IsRemoved != true && phone.Photo!=null)
-            {
-                phone.TotalViewed += 1;
-                await _dbContext.SaveChangesAsync();
-                return phone;
-            }
-            return null;
         }
 
         public async Task<bool> EditPhoneAsync(EditPhoneModel model) //todo change edit logic
@@ -88,7 +76,7 @@ namespace Infrastructore.Repository
             foreach (var item in phones)
             {
                 item.TotalViewed += 1;
-                await _dbContext.SaveChangesAsync();
+                var result = await _dbContext.SaveChangesAsync();
             }
             return phones;
         }

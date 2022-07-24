@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Models
+namespace Application.RepositoryInterfaces
 {
-   public class ShowPhonePhotoModel
+    public interface IOriginRepository
     {
-        public byte[] Photo{ get; set; }
+        List<string> GetOrigins();
     }
 }
