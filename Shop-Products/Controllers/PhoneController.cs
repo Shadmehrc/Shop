@@ -23,7 +23,7 @@ namespace Shop_Products.Controllers
 
         [HttpPost]
         [Route("AddPhone")]
-        public async Task<IActionResult> AddProductAsync([FromQuery] AddPhoneModel addPhoneModel)
+        public async Task<IActionResult> AddProductAsync([FromForm] AddPhoneModel addPhoneModel)
         {
             var result = await _iPhoneCrudService.AddPhoneAsync(addPhoneModel);
             return result ? new ApiResponse().Success("Phone successfully added.")

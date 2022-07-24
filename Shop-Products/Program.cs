@@ -20,10 +20,10 @@ namespace Shop_Products
              .ConfigureWebHostDefaults(webBuilder =>
              {
                  webBuilder.UseStartup<Startup>();
-                 webBuilder.UseKestrel(opts =>
-                 {
-                     opts.ListenAnyIP(Convert.ToInt32(_applicationPort));
-                 });
+                 //webBuilder.UseKestrel(opts =>
+                 //{
+                 //    opts.ListenAnyIP(Convert.ToInt32(_applicationPort));
+                 //});
 
              });
 

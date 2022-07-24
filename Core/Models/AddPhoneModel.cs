@@ -47,8 +47,8 @@ namespace Core.Models
         [Display(Description = "قیمت به تومان")]
         public int Price { get; set; }
 
-        [Required]
-        [Display(Description = "عکس محصول")]
+        //[Required]
+        //[Display(Description = "عکس محصول")]
         public IFormFile Photo { get; set; }
     }
 }
