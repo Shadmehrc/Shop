@@ -48,8 +48,7 @@ namespace Shop_Products
             {
                 configurePolicy.WithOrigins(validOrigins.Split(','))
                     .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
+                    .AllowAnyMethod();
             });
         });
 
