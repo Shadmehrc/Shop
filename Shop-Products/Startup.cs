@@ -43,14 +43,14 @@ namespace Shop_Products
                 }
             }
             services.AddCors(options =>
-        {
-            options.AddPolicy("AllowOrigin", configurePolicy =>
             {
-                configurePolicy.WithOrigins(validOrigins.Split(','))
+                options.AddPolicy("AllowOrigin", configurePolicy =>
+                {
+                    configurePolicy.WithOrigins(validOrigins.Split(','))
                     .AllowAnyHeader()
                     .AllowAnyMethod();
+                });
             });
-        });
 
             services.AddSwaggerGen(c =>
             {
