@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,16 +42,23 @@ namespace Application.Services
             return result;
         }
 
-        public async Task<ShowPhoneModel> ShowPhoneAsync(int id)
+        public async Task<ShowPhoneDetailsModel> ShowPhoneDetailsAsync(int id)
         {
-            var result = await _iPhoneRepository.ShowPhoneAsync(id);
+            var result = await _iPhoneRepository.ShowPhoneDetailsAsync(id);
             if (result!=null)
             {
-                var phone=  result.Adapt<ShowPhoneModel>();
+                var phone=  result.Adapt<ShowPhoneDetailsModel>();
                 return phone;
             }
 
             return null;
+        }
+
+        public async Task<ShowPhonePhotoModel> ShowPhonePhotoAsync(int id)
+        {
+            var result = await _iPhoneRepository.ShowPhonePhotoAsync(id);
+            var phonePhoto = result.Adapt<ShowPhonePhotoModel>();
+            return phonePhoto;
         }
 
         public async Task<bool> EditPhoneAsync(EditPhoneModel model)
@@ -65,7 +73,7 @@ namespace Application.Services
             return result;
         }
 
-        public async Task<List<ShowPhoneModel>> ShowPhoneAllAsync(GetAllPhonesModel model)
+        public async Task<List<ShowPhoneDetailsModel>> ShowPhoneAllAsync(GetAllPhonesModel model)
         {
             var pagination = new GetAllPhonesPagination()
             {
@@ -73,10 +81,10 @@ namespace Application.Services
                 Skip = (model.PageNumber -1) * model.ItemPerPage
             };
             var result = await _iPhoneRepository.ShowPhoneAllAsync(pagination);
-            var phones = new List<ShowPhoneModel>();
+            var phones = new List<ShowPhoneDetailsModel>();
             foreach (var item in result)
             {
-                phones.Add(item.Adapt<ShowPhoneModel>());
+                phones.Add(item.Adapt<ShowPhoneDetailsModel>());
             }
             return phones;
         }

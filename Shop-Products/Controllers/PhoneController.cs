@@ -32,11 +32,20 @@ namespace Shop_Products.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> ShowPhoneByIdAsync(int id)
+        public async Task<IActionResult> ShowPhoneDetailsByIdAsync(int id)
         {
-            var result = await _iPhoneCrudService.ShowPhoneAsync(id);
-            return result !=null ? new ApiResponse().Success(result)
+            var result = await _iPhoneCrudService.ShowPhoneDetailsAsync(id);
+            return result != null ? new ApiResponse().Success(result)
                 : new ApiResponse().FailedToFind("Phone doesn't exists.");
+        }
+
+        [HttpGet]
+        [Route("Photo/{id}")]
+        public async Task<IActionResult> ShowPhonePhotoByIdAsync(int id)
+        {
+            var result = await _iPhoneCrudService.ShowPhonePhotoAsync(id);
+            return result != null ? new FileContentResult(result.Photo, "image/png")
+                : new ApiResponse().FailedToFind("Photo doesn't exists.");
         }
 
 
@@ -49,7 +58,7 @@ namespace Shop_Products.Controllers
 
         [HttpPut]
         [Route("EditPhone")]
-        public async Task<IActionResult> EditPhoneAsync([FromQuery]EditPhoneModel editPhoneModel)
+        public async Task<IActionResult> EditPhoneAsync([FromQuery] EditPhoneModel editPhoneModel)
         {
             var result = await _iPhoneCrudService.EditPhoneAsync(editPhoneModel);
             return Ok(result);
