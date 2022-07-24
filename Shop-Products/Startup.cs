@@ -75,7 +75,7 @@ namespace Shop_Products
             {
                 endpoints.MapControllers();
             });
-            app.UseCors("AllowOriginV2");
+            app.UseCors("AllowOrigin");
         }
     }
 }
