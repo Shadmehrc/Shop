@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -19,12 +18,11 @@ namespace Shop_Products
          Host.CreateDefaultBuilder(args)
              .ConfigureWebHostDefaults(webBuilder =>
              {
-                 webBuilder.UseStartup<Startup>();
-                 //webBuilder.UseKestrel(opts =>
-                 //{
-                 //    opts.ListenAnyIP(Convert.ToInt32(_applicationPort));
-                 //});
-
+                 webBuilder
+                     .UseKestrel()
+                     .UseIIS()
+                     .UseUrls($"http://*:{_applicationPort}")
+                     .UseStartup<Startup>();
              });
 
         private static void InitialConfig(string[] args)

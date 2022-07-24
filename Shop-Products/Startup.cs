@@ -46,10 +46,10 @@ namespace Shop_Products
             {
                 options.AddPolicy("AllowOrigin", configurePolicy =>
                 {
-                    configurePolicy.WithOrigins(validOrigins.Split(','))
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-                });
+                    configurePolicy.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
             });
 
             services.AddSwaggerGen(c =>
@@ -61,6 +61,7 @@ namespace Shop_Products
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("AllowOrigin");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -70,12 +71,11 @@ namespace Shop_Products
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shop_Products v1"));
             app.UseHttpsRedirection();
             app.UseRouting();
-            //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-            app.UseCors("AllowOrigin");
+            
         }
     }
 }
