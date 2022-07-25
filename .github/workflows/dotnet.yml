@@ -28,6 +28,6 @@ jobs:
       run: nuget restore Shop-Products.sln
     
     - name: Build the solution
-      run: msbuild Shop-Products.sln
+      run: msbuild Shop-Products.sln /p:Configuration=Release
 
 
