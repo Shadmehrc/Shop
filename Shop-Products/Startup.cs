@@ -32,16 +32,16 @@ namespace Shop_Products
             services.AddScoped<IPhoneCrudService, PhoneCrudService>();
             services.AddScoped<IPhoneRepository, PhoneRepository>();
             services.AddScoped<IOriginRepository, OriginRepository>();
-            services.AddScoped<IConfigManager, ConfigManager>();
-            {
-                var buildServiceProvider = services.BuildServiceProvider();
-                var service = buildServiceProvider.GetService<IConfigManager>();
-                if (service != null)
-                {
-                    originsList = service.GetOrigin();
-                    originsList.ForEach(x => validOrigins += x + ',');
-                }
-            }
+            //services.AddScoped<IConfigManager, ConfigManager>();
+            //{
+            //    var buildServiceProvider = services.BuildServiceProvider();
+            //    var service = buildServiceProvider.GetService<IConfigManager>();
+            //    if (service != null)
+            //    {
+            //        originsList = service.GetOrigin();
+            //        originsList.ForEach(x => validOrigins += x + ',');
+            //    }
+            //}
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowOrigin", configurePolicy =>
