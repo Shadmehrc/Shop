@@ -1,6 +1,5 @@
 using System;
 using System.Net;
-using System.Security.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +29,6 @@ namespace Shop_Products
                         {
                             options.Listen(IPAddress.Any, Convert.ToInt32(_applicationPort), listenOptions =>
                             {
-                                listenOptions.UseHttps(o => o.SslProtocols = SslProtocols.None );
                                 listenOptions.UseConnectionLogging();
                                 listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
                             });
@@ -40,7 +38,7 @@ namespace Shop_Products
         private static void InitialConfig(string[] args)
         {
             var env = new WebHostBuilder();
-            var environmentName = env.GetSetting("environment");
+            env.GetSetting("environment");
 
             _config = new ConfigurationBuilder().AddCommandLine(args)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
