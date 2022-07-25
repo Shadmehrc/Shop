@@ -18,23 +18,32 @@ namespace Shop_Products
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder
-                        .UseKestrel()
-                        .UseIIS()
-                        .UseStartup<Startup>()
-                        .ConfigureKestrel((context, options) =>
-                        {
-                            options.Listen(IPAddress.Any, Convert.ToInt32(_applicationPort), listenOptions =>
-                            {
-                                listenOptions.UseConnectionLogging();
-                                listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-                            });
-                        });
-                });
 
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder
+                    .UseKestrel()
+                    .UseIIS()
+                    .UseUrls($"http://*:{_applicationPort}")
+                    .UseStartup<Startup>();
+            });
+        //Host.CreateDefaultBuilder(args)
+        //    .ConfigureWebHostDefaults(webBuilder =>
+        //    {
+        //        webBuilder
+        //            .UseKestrel()
+        //            .UseIIS()
+        //            .UseStartup<Startup>()
+        //            .ConfigureKestrel((context, options) =>
+        //            {
+        //                options.Listen(IPAddress.Any, Convert.ToInt32(_applicationPort), listenOptions =>
+        //                {
+        //                    listenOptions.UseConnectionLogging();
+        //                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+        //                });
+        //            });
+        //    });
         private static void InitialConfig(string[] args)
         {
             var env = new WebHostBuilder();
