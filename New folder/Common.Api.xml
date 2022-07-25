@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Common.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Common.Api.Controllers.AgreementController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Common.Api.Controllers.AgreementController.#ctor(Common.Application.DataProvider.Agreement.ICustomerAgreementManager)">
+            <summary>
+            
+            </summary>
+            <param name="customerAgreementManager"></param>
+        </member>
+        <member name="M:Common.Api.Controllers.AgreementController.Get">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Common.Api.Controllers.AgreementController.Update(Common.Application.DataProvider.Agreement.Dto.AgreementUpdateInputDto)">
+            <summary>
+            
+            </summary>
+            <param name="inputDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.Api.Controllers.CustomerController.#ctor(Common.Application.DataProvider.User.IUserManager)">
+            <summary>
+            
+            </summary>
+            <param name="userManager"></param>
+        </member>
+        <member name="M:Common.Api.Controllers.CustomerController.GeneralInformation">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Common.Api.Controllers.CustomerController.ChangeUsername(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Username"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Common.Api.Controllers.SymbolController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Common.Api.Controllers.SymbolController.#ctor(Common.Application.DataProvider.Symbol.ISymbolManager)">
+            <summary>
+            
+            </summary>
+            <param name="portfolioManager"></param>
+        </member>
+        <member name="T:Common.Api.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Common.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Hosting.IHostEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+            <param name="environment"></param>
+        </member>
+        <member name="M:Common.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Common.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+            <param name="provider"></param>
+        </member>
+        <member name="M:Common.Api.Swagger.ConfigureSwaggerOptions.#ctor(Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Common.Api.Swagger.ConfigureSwaggerOptions"/> class.
+            </summary>
+            <param name="provider">The <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider">provider</see> used to generate Swagger documents.</param>
+        </member>
+        <member name="M:Common.Api.Swagger.ConfigureSwaggerOptions.Configure(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Common.Api.Swagger.SwaggerDefaultValues.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Applies the filter to the specified operation using the given context.
+            </summary>
+            <param name="operation">The operation to apply the filter to.</param>
+            <param name="context">The current operation filter context.</param>
+        </member>
+    </members>
+</doc>
