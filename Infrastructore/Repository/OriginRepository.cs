@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
 using Dapper;
 using Microsoft.Data.SqlClient;
