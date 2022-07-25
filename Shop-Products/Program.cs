@@ -30,7 +30,7 @@ namespace Shop_Products
                         {
                             options.Listen(IPAddress.Any, Convert.ToInt32(_applicationPort), listenOptions =>
                             {
-                                listenOptions.UseHttps(o => o.SslProtocols = SslProtocols.Tls12);
+                                listenOptions.UseHttps(o => o.SslProtocols = SslProtocols.None );
                                 listenOptions.UseConnectionLogging();
                                 listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
                             });
