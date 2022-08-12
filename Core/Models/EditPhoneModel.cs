@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Core.Models
 {
@@ -17,5 +18,6 @@ namespace Core.Models
         public string GraphicModel { get; set; }
         public string LcdModel { get; set; }
         public int Price { get; set; }
+        public IFormFile Photo { get; set; }
     }
 }

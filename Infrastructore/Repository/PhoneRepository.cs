@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Common;
 using Application.RepositoryInterfaces;
 using Core.Entities;
 using Core.Models;
@@ -35,7 +36,7 @@ namespace Infrastructore.Repository
 
         public async Task<Phone> ShowPhoneDetailsAsync(int id)
         {
-            var phone = await _dbContext.Phones.FirstOrDefaultAsync(x => x.Id == id);
+            var phone = await _dbContext.Phones.FirstOrDefaultAsync(x => x.Id == id );
            if (phone != null && phone.IsRemoved!=true)
            {
                 phone.TotalViewed += 1;
@@ -59,6 +60,12 @@ namespace Infrastructore.Repository
 
         public async Task<bool> EditPhoneAsync(EditPhoneModel model) //todo change edit logic
         {
+            var photo = Array.Empty<byte>();
+            if (model.Photo != null)
+            {
+                var photoConverter = new ConvertImageToByteArray();
+                photo = await photoConverter.Get(model.Photo);
+            }
             var phone = await _dbContext.Phones.FirstOrDefaultAsync(x => x.Id == model.Id);
             if (phone != null && phone.IsRemoved != true)
             {
@@ -69,6 +76,10 @@ namespace Infrastructore.Repository
                 phone.Storage = model.Storage;
                 phone.Model = model.Model;
                 phone.Price = model.Price;
+                if (photo.Length>1)
+                {
+                    phone.Photo = photo;
+                }
                 var result = await _dbContext.SaveChangesAsync();
             }
             return true;
