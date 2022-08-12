@@ -84,9 +84,11 @@ namespace Infrastructore.Repository
 
         public async Task<List<Phone>> ShowPhoneAllAsync(GetAllPhonesPagination model)
         {
-            var phones = await _dbContext.Phones.Skip(model.Skip).Take(model.Take).ToListAsync();
+            var phones = await _dbContext.Phones.Where(x=>x.IsRemoved==false)
+                .Skip(model.Skip).Take(model.Take).ToListAsync();
             foreach (var item in phones)
             {
+
                 item.TotalViewed += 1;
                 await _dbContext.SaveChangesAsync();
             }
