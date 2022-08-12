@@ -24,8 +24,13 @@ namespace Application.Services
 
         public async Task<bool> AddPhoneAsync(AddPhoneModel model)
         {
-            var photoConverter = new ConvertImageToByteArray();
-            var photo = await photoConverter.Get(model.Photo);
+            var photo = Array.Empty<byte>();
+            if (model.Photo!=null)
+            {
+                var photoConverter = new ConvertImageToByteArray();
+                 photo = await photoConverter.Get(model.Photo);
+            }
+           
             var phone = new Phone()
             {
                 Brand = model.Brand,
